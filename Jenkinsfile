@@ -28,7 +28,7 @@ pipeline {
             steps {
                 // Copy the dist/ folder to Tomcat ROOT
                 sh '''
-                scp -o StrictHostKeyChecking=no -i /path/to/EC_Bas.pem -r dist/* ec2-user@65.0.203.66:/opt/tomcat/webapps/ROOT/
+                scp -o StrictHostKeyChecking=no -i /Users/himanshubankar/Downloads/EC_Bas.pem -r dist/* ec2-user@65.0.203.66:/opt/tomcat/webapps/ROOT/
                 '''
             }
         }
