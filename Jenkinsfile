@@ -34,6 +34,24 @@ pipeline {
         '''
     }
 }
+stage('Deploy to EC2') {
+            steps {
+                sh '''
+                scp -o StrictHostKeyChecking=no -i /Users/himanshubankar/Downloads/EC_Bas.pem -r dist/* ec2-user@65.0.203.66:/opt/tomcat/webapps/ROOT/
+                '''
+            }
+        }
+
+        stage('Restart Tomcat') {
+            steps {
+                sh '''
+                ssh -o StrictHostKeyChecking=no -i /Users/himanshubankar/Downloads/EC_Bas.pem ec2-user@65.0.203.66 '
+                    /opt/tomcat/bin/shutdown.sh || true
+                    /opt/tomcat/bin/startup.sh
+                '
+                '''
+            }
+        }
 
     }
 }
